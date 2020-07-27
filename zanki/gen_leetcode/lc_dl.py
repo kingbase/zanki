@@ -8,10 +8,11 @@ from zanki.gen_leetcode.gql_query import solutionDetailArticleQuery,\
 from zanki import conf
 
 directory = os.path.dirname(os.path.realpath(__file__))
-user_agent = r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
+user_agent = r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2401.157 Safari/537.36'
 cookie = conf.LEETCODE_COOKIE
 if len(cookie) == 0:
     print("Cookie is empty, if you want to crawl paid questions and answers, please specify cookie in zanki/zanki/conf.py#LEETCODE_COOKIE")
+    input("Press anykey to continue crawl.")
 
 site = {
     "CN": "https://leetcode-cn.com/graphql",
