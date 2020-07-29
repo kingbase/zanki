@@ -2,6 +2,7 @@
 import time
 from copy import deepcopy
 import argparse
+import tqdm
 
 import pandas as pd
 import glob
@@ -61,7 +62,7 @@ lang = "CN"
 df = pd.read_pickle(os.path.join(base_folder, "index.pkl"))
 question_slugs = df.question__title_slug.to_dict()
 
-for pid, problem_slug in question_slugs.items():
+for pid, problem_slug in tqdm.tqdm(question_slugs.items()):
     difficulty = lc_util.get_difficulty(pid)
     tags = lc_util.get_tags(pid)
     describe_html_fn = os.path.join(base_folder, "html_describe", "%s-%s-%s.html" % (lang, pid, problem_slug))

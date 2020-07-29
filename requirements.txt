@@ -13,3 +13,4 @@ misaka==2.1.1  # use conda to install while on Windows (conda install -c conda-f
 Pygments==2.4.0
 pandas
 requests
+tqdm
