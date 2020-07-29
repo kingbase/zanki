@@ -36,6 +36,7 @@ if args.output not in ["desktop", "file"]:
 
 if args.output == "file":
     collection_fn = os.path.join(directory, "..", "..", "output", "leetcode", "leetcode.anki2")
+    collection_fn = os.path.abspath(collection_fn)
 elif args.output == "desktop":
     collection_fn = util_anki.get_default_collection()
 col = Collection(collection_fn, log=True)
