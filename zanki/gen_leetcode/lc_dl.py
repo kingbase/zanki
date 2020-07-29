@@ -1,4 +1,7 @@
 import os
+import argparse
+import sys
+
 import requests
 import pandas as pd
 from copy import deepcopy
@@ -7,12 +10,25 @@ from zanki.gen_leetcode.gql_query import solutionDetailArticleQuery,\
     questionSolutionArticlesQuery, getQuestionDetailQuery
 from zanki import conf
 
+def usage():
+    print("Please specify the mode you want:\n"
+          "eval: for evaluation purpose, only first 150 leetcode problems will be saved.\n"
+          "full: All available problems will be saved depends on paid or not.")
+
 directory = os.path.dirname(os.path.realpath(__file__))
 user_agent = r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2401.157 Safari/537.36'
 cookie = conf.LEETCODE_COOKIE
+is_paid_user = True
 if len(cookie) == 0:
     print("Cookie is empty, if you want to crawl paid questions and answers, please specify cookie in zanki/zanki/conf.py#LEETCODE_COOKIE")
-    input("Press anykey to continue crawl.")
+    is_paid_user = False
+
+parser = argparse.ArgumentParser()
+parser.add_argument("mode", help="[eval] for test or [full] for all problems")
+args = parser.parse_args()
+if args.mode not in ["eval", "full"]:
+    usage()
+    sys.exit()
 
 site = {
     "CN": "https://leetcode-cn.com/graphql",
@@ -55,7 +71,10 @@ df  = pd.concat([df_stat, df], axis=1)
 df  = df.set_index("frontend_question_id").sort_values(by=["question_id"])
 # 前200个题目中，有8道付费题目：156/156/158/159/161/163/170/186
 # 开始时可以跳过这些题目
-df  = df.head(150)
+if not is_paid_user:
+    df  = df[df.paid_only == False]
+if args.mode == "eval":
+    df = df.head(200)
 
 lang = "CN"
 base_folder = os.path.join(directory, "..", "..", "output", "raw", "leetcode")
