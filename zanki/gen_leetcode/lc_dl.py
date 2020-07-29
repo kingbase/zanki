@@ -62,6 +62,8 @@ base_folder = os.path.join(directory, "..", "..", "output", "raw", "leetcode")
 if not os.path.exists(base_folder):
     os.makedirs(base_folder)
 df.to_pickle(os.path.join(base_folder, "index.pkl"))
+df["难度"] = df.difficulty_level.map({1: "简单", 2: "中等", 3: "困难"})
+df["难度"].to_csv(os.path.join(directory, "resources", "难度.csv"))
 question_slugs = df.question__title_slug.to_dict()
 
 solution_articles = {}
