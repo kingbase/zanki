@@ -11,6 +11,7 @@ sys.path.append(os.path.join(directory, "..", "..", "anki"))
 from anki.storage import Collection
 from anki.exporting import AnkiCollectionPackageExporter
 from anki.notes import Note
+from anki.stdmodels import addBasicModel
 
 from zanki import conf
 from zanki import util
@@ -24,6 +25,9 @@ col = Collection(collection_fn, log=True)
 my_sol_folder = os.path.join(directory, "..", "..", "output", "raw", "leetcode", "my_solution")
 
 modelBasic = col.models.byName('Basic')
+if modelBasic is None:
+    # 新安装的 Anki 桌面端会存在为空的情况
+    modelBasic = addBasicModel(col)
 modelBasic["css"] = conf.DEFAULT_CSS_N_ALIGN + "\n" + conf.HIGHLIGHT_CSS
 modelBasic["tmpls"][0]["qfmt"] = "{{Front}}" + conf.JS_TEMPLATE
 modelBasic["tmpls"][0]["afmt"] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}" + conf.JS_TEMPLATE
