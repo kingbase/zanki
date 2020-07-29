@@ -1,4 +1,15 @@
-misaka==2.1.1  # use conda to install while on Windows
+# from anki start
+beautifulsoup4
+send2trash
+requests
+decorator
+markdown
+jsonschema
+pywin32; sys_platform == "win32"
+psutil; sys_platform == "win32"
+distro; sys_platform != "win32" and sys_platform != "darwin"
+# from anki end
+misaka==2.1.1  # use conda to install while on Windows (conda install -c conda-forge misaka)
 Pygments==2.4.0
 pandas
 requests
