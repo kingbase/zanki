@@ -10,7 +10,9 @@ cur = get_script_dir(__file__)
 collection_folder = os.path.join(cur, "resources", "collections")
 resource_folder = os.path.join(cur, "resources")
 
-ser_diff = pd.read_csv(os.path.join(resource_folder, "难度.csv")).set_index("frontend_question_id")
+df_diff = pd.read_csv(os.path.join(resource_folder, "难度.csv"))
+df_diff["frontend_question_id"] = df_diff.frontend_question_id.astype(str)
+ser_diff = df_diff.set_index("frontend_question_id")["难度"]
 diff_dict = ser_diff.to_dict()
 
 problem_tag_dict = {
