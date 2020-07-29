@@ -1,6 +1,7 @@
 #coding: utf-8
 import time
 from copy import deepcopy
+import argparse
 
 import pandas as pd
 import glob
@@ -19,8 +20,23 @@ from zanki import md_util
 from zanki.gen_leetcode import lc_util
 from zanki import util_anki
 
-collection_fn = os.path.join(directory, "..", "..", "output", "leetcode", "leetcode.anki2")
-collection_fn = util_anki.get_default_collection()
+def usage():
+    print("Location of output: desktop or file\n"
+          "desktop: Write to default user of anki desktop app, "
+          "so you can use it in your desktop app or sync from desktop app to other devices like iOS and Android app.\n"
+          "file: Write to folder output/leetcode and you can distribute it online or import it to your anki app manually.")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("output", help="Location of output: desktop or file")
+args = parser.parse_args()
+if args.output not in ["desktop", "file"]:
+    usage()
+    sys.exit()
+
+if args.output == "file":
+    collection_fn = os.path.join(directory, "..", "..", "output", "leetcode", "leetcode.anki2")
+elif args.output == "desktop":
+    collection_fn = util_anki.get_default_collection()
 col = Collection(collection_fn, log=True)
 my_sol_folder = os.path.join(directory, "..", "..", "output", "raw", "leetcode", "my_solution")
 
@@ -43,7 +59,7 @@ deck = col.decks.byName(deck_name)
 base_folder = os.path.join(directory, "..", "..", "output", "raw", "leetcode")
 lang = "CN"
 df = pd.read_pickle(os.path.join(base_folder, "index.pkl"))
-question_slugs = df.head(10).question__title_slug.to_dict()
+question_slugs = df.question__title_slug.to_dict()
 
 for pid, problem_slug in question_slugs.items():
     difficulty = lc_util.get_difficulty(pid)
