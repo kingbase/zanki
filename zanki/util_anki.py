@@ -49,7 +49,7 @@ def get_default_collection(user=DEFAULT_USERNAME):
     if user_dir is not None:
         dst_file = os.path.join(user_dir, "collection.anki2")
         return dst_file
-    return None
+    raise Exception("Anki was not installed or user (%s) was not created." %(user))
 
 def is_windows():
     return platform.system() == "Windows"

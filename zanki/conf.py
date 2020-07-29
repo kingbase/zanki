@@ -1,7 +1,6 @@
 import os
 
-def get_script_dir(f):
-    return os.path.dirname(os.path.abspath(f))
+from zanki.util import get_script_dir
 
 LEETCODE_COOKIE = ""
 
@@ -31,8 +30,8 @@ DEFAULT_CSS_N_ALIGN = """.card {
 }"""
 
 script_dir = get_script_dir(__file__)
-css_fn     = os.path.join(script_dir, "static/highlight.css")
-js_fn      = os.path.join(script_dir, "static/math.js")
+css_fn     = os.path.join(script_dir, "static", "highlight.css")
+js_fn      = os.path.join(script_dir, "static", "math.js")
 
 HIGHLIGHT_CSS = open(css_fn, encoding="utf-8").read()
 MATH_JS       = open(js_fn, encoding="utf-8").read()
