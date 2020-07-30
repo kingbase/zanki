@@ -13,6 +13,8 @@
   - Anki for Windows (2.1.15) (Tested)
   - Anki for Linux (2.1.15) (Tested)
   - Mac (Waiting for test)
+  - iOS Anki Mobile (2.0.53) (Tested)
+  - Android Anki (Wating for test)
 
 ## 使用步骤和说明（leetcode）
 
