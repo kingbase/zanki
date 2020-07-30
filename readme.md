@@ -10,8 +10,9 @@
 3. 安装依赖（zanki/requirements.txt），对于 Windows 用户如果安装 `mistune` 失败可以尝试使用 `conda install -c conda-forge misaka`
 
 ## 兼容性测试
-  - Anki for Windows (2.1.15)
-  - Anki for Linux (2.1.15)
+  - Anki for Windows (2.1.15) (Tested)
+  - Anki for Linux (2.1.15) (Tested)
+  - Mac (Waiting for test)
 
 ## 使用步骤和说明（leetcode）
 
