@@ -10,7 +10,7 @@ psutil; sys_platform == "win32"
 distro; sys_platform != "win32" and sys_platform != "darwin"
 # from anki end
 misaka==2.1.1  # use conda to install while on Windows (conda install -c conda-forge misaka)
-Pygments==2.4.0
+Pygments==2.7.4
 pandas
 requests
 tqdm
